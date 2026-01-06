@@ -2,3 +2,7 @@
 # Jeu python
 
 Projet de Provost Lucie 
+
+## Organisation
+
+Je décris brièvement le projet

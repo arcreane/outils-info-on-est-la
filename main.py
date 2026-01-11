@@ -13,6 +13,8 @@ clock = pygame.time.Clock()
 running = True
 dt = 0
 
+print("test")
+
 player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
 
 while running:

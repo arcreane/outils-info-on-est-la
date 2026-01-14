@@ -1,10 +1,16 @@
 # Example file showing a circle moving on screen
+from threading import Condition
+
 import pygame
+
+from projectile import fire_bullet
 
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
 PLAYER_SPEED = 500
 PLAYER_WIDTH = 40
+
+Condition = 0
 
 # pygame setup
 pygame.init()
@@ -25,20 +31,28 @@ while running:
             running = False
 
     # fill the screen with a color to wipe away anything from last frame
-    screen.fill("purple")
+    screen.fill("white")
 
-    pygame.draw.circle(screen, "red", player_pos, PLAYER_WIDTH)
+    pygame.draw.circle(screen, "Blue", player_pos, PLAYER_WIDTH)
 
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_z]:
-        player_pos.y -= PLAYER_SPEED * dt
-    if keys[pygame.K_s]:
-        player_pos.y += PLAYER_SPEED * dt
+  # if keys[pygame.K_z]:
+  #      player_pos.y -= PLAYER_SPEED * dt
+  # if keys[pygame.K_s]:
+  #     player_pos.y += PLAYER_SPEED * dt
     if keys[pygame.K_q]:
         player_pos.x -= PLAYER_SPEED * dt
     if keys[pygame.K_d]:
         player_pos.x += PLAYER_SPEED * dt
+    if keys[pygame.K_SPACE]:
+        fire_bullet(player_pos.x,player_pos.y)
 
+    while Condition == 0:
+        player_pos = pygame.Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT - PLAYER_WIDTH - 20)
+        Condition = Condition + 1
+
+    r = PLAYER_WIDTH
+    player_pos.x = max(r, min(SCREEN_WIDTH - r, player_pos.x))
 
     # flip() the display to put your work on screen
     pygame.display.flip()
@@ -49,3 +63,4 @@ while running:
     dt = clock.tick(60) / 1000
 
 pygame.quit()
+
